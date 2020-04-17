@@ -1,3 +1,14 @@
+/******************************************************************
+* Class: CSC-615-01 Spring 2020
+* Name: Micaella Morales
+* Student ID: 916832064
+* Project: Assignment 4 - Motors & Speed Encoder
+* File: Motor.c
+*
+* Description:
+* 
+******************************************************************/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <wiringPi.h>

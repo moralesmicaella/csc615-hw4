@@ -1,6 +1,16 @@
-#ifndef motor_h
-    #define motor_h
+/******************************************************************
+* Class: CSC-615-01 Spring 2020
+* Name: Micaella Morales
+* Student ID: 916832064
+* Project: Assignment 4 - Motors & Speed Encoder
+* File: Motor.h
+*
+* Description:
+* 
+******************************************************************/
 
+#ifndef MOTOR_H
+#define MOTOR_H
     extern int keyboard_interrupt;
 
     typedef struct Motor {

@@ -1,5 +1,5 @@
-make: assignment3.c
-	gcc -Wall assignment3.c Motor.c -o assignment3 -lwiringPi -lpthread
+make: assignment4.c
+	gcc -Wall assignment4.c Motor.c -o assignment4 -lwiringPi -lpthread
 
 clean:
-	rm assignment3
+	rm assignment4
