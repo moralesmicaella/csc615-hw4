@@ -11,8 +11,6 @@
 
 #ifndef MOTOR_H
 #define MOTOR_H
-    extern int keyboard_interrupt;
-
     typedef struct Motor {
         int num, e, f, r;
     } Motor;
@@ -20,6 +18,9 @@
     typedef struct Arrow {
         int af, ab;
     } Arrow;
+
+    extern int keyboard_interrupt;
+    extern Motor m1, m2;
 
     int setup(Motor motors[], int n, Arrow arrows);
     void cleanup(Motor motors[], int n, Arrow arrows);

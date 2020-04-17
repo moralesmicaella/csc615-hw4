@@ -21,12 +21,6 @@ void sigint_handler(int sig_num) {
 }
 
 int main(void) {
-    // creates the motors and sets their motor pins
-    // wiringPi 0 = P11, wiringPi 2 = P13, wiringPi 3 = P15
-    // wiringPi 6 = P22, wiringPi 4 = P16, wiringPi 5 = P18
-    Motor m1 = {.num = 1, .e = 0, .f = 2, .r = 3};
-    Motor m2 = {.num = 2, .e = 6, .f = 4, .r = 5}; 
-    
     Motor motors[] = {m1, m2};
     int n = sizeof(motors) / sizeof(motors[0]);
 

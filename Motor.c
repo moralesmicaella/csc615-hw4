@@ -17,6 +17,11 @@
 
 int keyboard_interrupt = 0;
 
+// wiringPi 0 = P11, wiringPi 2 = P13, wiringPi 3 = P15
+// wiringPi 6 = P22, wiringPi 4 = P16, wiringPi 5 = P18
+Motor m1 = {.num = 1, .e = 0, .f = 2, .r = 3};
+Motor m2 = {.num = 2, .e = 6, .f = 4, .r = 5}; 
+
 // initializes the wiringPi and sets the motor and arrow pins to output mode
 int setup(Motor motors[], int n, Arrow arrows) {
     if (wiringPiSetup() == -1) {
