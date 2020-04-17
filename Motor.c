@@ -33,7 +33,7 @@ int setup(Motor motors[], int n, Arrow arrows) {
         digitalWrite(motors[i].r, LOW);
     }
     pinMode(arrows.af, OUTPUT);
-    pinMode(arrows.ar, OUTPUT);
+    pinMode(arrows.ab, OUTPUT);
     return 0;
 }
 
@@ -50,9 +50,9 @@ void cleanup(Motor motors[], int n, Arrow arrows) {
     }
 
     digitalWrite(arrows.af, LOW); 
-    digitalWrite(arrows.ar, LOW); 
+    digitalWrite(arrows.ab, LOW); 
     pinMode(arrows.af, INPUT); 
-    pinMode(arrows.ar, INPUT);
+    pinMode(arrows.ab, INPUT);
 }
 
 // changes the speed to 0% and sets the forward and reverse pins to low
@@ -66,7 +66,7 @@ void stop(Motor motors[], int n, Arrow arrows) {
 
     // turns off the light of the arrows in the motorshield
     digitalWrite(arrows.af, LOW); 
-    digitalWrite(arrows.ar, LOW); 
+    digitalWrite(arrows.ab, LOW); 
 
     // cleans up the pins when there is a keyboard interrupt and exits the program
     if (keyboard_interrupt) {
@@ -88,7 +88,7 @@ void forward(Motor motors[], int n, int speed, Arrow arrows) {
 
     // lights up the forward arrow in the motorshield
     digitalWrite(arrows.af, HIGH); 
-    digitalWrite(arrows.ar, LOW); 
+    digitalWrite(arrows.ab, LOW); 
 
     // cleans up the pins when there is a keyboard interrupt and exits the program
     if (keyboard_interrupt) {
@@ -110,7 +110,7 @@ void backward(Motor motors[], int n, int speed, Arrow arrows) {
 
     // lights up the backward arrow in the motorshield
     digitalWrite(arrows.af, LOW); 
-    digitalWrite(arrows.ar, HIGH); 
+    digitalWrite(arrows.ab, HIGH); 
 
     // cleans up the pins when there is a keyboard interrupt and exits the program
     if (keyboard_interrupt) {

@@ -18,7 +18,7 @@
     } Motor;
 
     typedef struct Arrow {
-        int af, ar;
+        int af, ab;
     } Arrow;
 
     int setup(Motor motors[], int n, Arrow arrows);

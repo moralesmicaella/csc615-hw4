@@ -31,7 +31,7 @@ int main(void) {
     int n = sizeof(motors) / sizeof(motors[0]);
 
     // wiringPi 25 = P37, wiringPi 23 = P33
-    Arrow arrows = {.af = 25, .ar = 23};
+    Arrow arrows = {.af = 25, .ab = 23};
 
     int speed = 10;
     
