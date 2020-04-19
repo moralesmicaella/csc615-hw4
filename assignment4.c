@@ -63,7 +63,10 @@ int main(void) {
     pinMode(SENSOR_PIN, INPUT);
     start = clock();
 
-    piThreadCreate(get_speed);
+    int x = piThreadCreate(get_speed);
+    if (x != 0) {
+        printf("Thread did not start!")
+    }
 
     int duty_cycle = 10;
     while (1) {
