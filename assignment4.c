@@ -58,7 +58,7 @@ int main(void) {
         return -1;
     } 
 
-    (setup(motors, n, arrows)
+    setup(motors, n, arrows);
     
     pinMode(SENSOR_PIN, INPUT);
     start = clock();
