@@ -2,7 +2,7 @@
 * Class: CSC-615-01 Spring 2020
 * Name: Micaella Morales
 * Student ID: 916832064
-* Project: Assignment 4 - Motors & Speed Encoder
+* Project: Assignment 4 - Motors & duty_cycle Encoder
 * File: Motor.c
 *
 * Description:
@@ -18,16 +18,12 @@
 int keyboard_interrupt = 0;
 
 // wiringPi 0 = P11, wiringPi 2 = P13, wiringPi 3 = P15
-// wiringPi 6 = P22, wiringPi 4 = P16, wiringPi 5 = P18
 Motor m1 = {.num = 1, .e = 0, .f = 2, .r = 3};
+// wiringPi 6 = P22, wiringPi 4 = P16, wiringPi 5 = P18
 Motor m2 = {.num = 2, .e = 6, .f = 4, .r = 5}; 
 
-// initializes the wiringPi and sets the motor and arrow pins to output mode
-int setup(Motor motors[], int n, Arrow arrows) {
-    if (wiringPiSetup() == -1) {
-        printf("WiringPi Setup failed!\n");
-        return -1;
-    } 
+// sets the motor and arrow pins to output mode
+void setup(Motor motors[], int n, Arrow arrows) {
     for (int i = 0; i < n; i++) {
         pinMode(motors[i].e, OUTPUT);
         pinMode(motors[i].f, OUTPUT);
@@ -39,7 +35,6 @@ int setup(Motor motors[], int n, Arrow arrows) {
     }
     pinMode(arrows.af, OUTPUT);
     pinMode(arrows.ab, OUTPUT);
-    return 0;
 }
 
 // sets all the motor and arrow pins to low and switches them into input mode
@@ -60,7 +55,7 @@ void cleanup(Motor motors[], int n, Arrow arrows) {
     pinMode(arrows.ab, INPUT);
 }
 
-// changes the speed to 0% and sets the forward and reverse pins to low
+// changes the duty_cycle to 0% and sets the forward and reverse pins to low
 void stop(Motor motors[], int n, Arrow arrows) {
     for (int i = 0; i < n; i++) {
         printf("Motor%d stops...\n", motors[i].num);
@@ -81,12 +76,12 @@ void stop(Motor motors[], int n, Arrow arrows) {
     }
 }
 
-// sets the enable pin of the motors with the given speed 
+// sets the enable pin of the motors with the given duty_cycle 
 // and sets the forward pin to high and the reverse pin to low
-void forward(Motor motors[], int n, int speed, Arrow arrows) {
+void forward(Motor motors[], int n, int duty_cycle, Arrow arrows) {
     for (int i = 0; i < n; i++) {
-        printf("Motor%d is moving forward with %d%% speed\n", motors[i].num, speed);
-        softPwmWrite(motors[i].e, speed);
+        printf("Motor%d is moving forward with %d%% speed\n", motors[i].num, duty_cycle);
+        softPwmWrite(motors[i].e, duty_cycle);
         digitalWrite(motors[i].f, HIGH);
         digitalWrite(motors[i].r, LOW);
     }
@@ -103,12 +98,12 @@ void forward(Motor motors[], int n, int speed, Arrow arrows) {
     }
 }
 
-// sets the enable pin of the motors with the given speed 
+// sets the enable pin of the motors with the given duty_cycle 
 // and sets the forward pin to low and the reverse pin to high
-void backward(Motor motors[], int n, int speed, Arrow arrows) {
+void backward(Motor motors[], int n, int duty_cycle, Arrow arrows) {
     for (int i = 0; i < n; i++) {
-        printf("Motor%d is moving backward with %d%% speed\n", motors[i].num, speed);
-        softPwmWrite(motors[i].e, speed);
+        printf("Motor%d is moving backward with %d%% speed\n", motors[i].num, duty_cycle);
+        softPwmWrite(motors[i].e, duty_cycle);
         digitalWrite(motors[i].f, LOW);
         digitalWrite(motors[i].r, HIGH);
     }
@@ -125,10 +120,10 @@ void backward(Motor motors[], int n, int speed, Arrow arrows) {
     }
 }
 
-// sets the enable pin of the motors with the given speed 
-void change_speed(Motor motors[], int n, int speed) {
+// sets the enable pin of the motors with the given duty_cycle 
+void change_speed(Motor motors[], int n, int duty_cycle) {
     for (int i = 0; i < n; i++) {
-        printf("The speed of Motor%d is changing to %d%% speed\n", motors[i].num, speed);
-        softPwmWrite(motors[i].e, speed);
+        printf("The speed of Motor%d is changing to %d%% speed\n", motors[i].num, duty_cycle);
+        softPwmWrite(motors[i].e, duty_cycle);
     }
 }

@@ -25,7 +25,7 @@
     int setup(Motor motors[], int n, Arrow arrows);
     void cleanup(Motor motors[], int n, Arrow arrows);
     void stop(Motor motors[], int n, Arrow arrows);
-    void forward(Motor motors[], int n, int speed, Arrow arrows);
-    void backward(Motor motors[], int n, int speed, Arrow arrows);
-    void change_speed(Motor motors[], int n, int speed);
+    void forward(Motor motors[], int n, int duty_cycle, Arrow arrows);
+    void backward(Motor motors[], int n, int duty_cycle, Arrow arrows);
+    void change_speed(Motor motors[], int n, int duty_cycle);
 #endif
