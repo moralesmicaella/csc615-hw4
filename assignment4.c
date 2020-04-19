@@ -65,7 +65,7 @@ int main(void) {
 
     int x = piThreadCreate(get_speed);
     if (x != 0) {
-        printf("Thread did not start!")
+        printf("Thread did not start!");
     }
 
     int duty_cycle = 10;
