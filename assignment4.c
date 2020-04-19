@@ -31,6 +31,7 @@ void sigint_handler(int sig_num) {
 
 PI_THREAD(get_speed) {
     int curr_state = digitalRead(SENSOR_PIN);
+    printf("current state: %d \n", curr_state);
     if(curr_state != prev_state) {
         if(curr_state == 1) {
             time_elapsed = clock() - start;
@@ -86,9 +87,9 @@ int main(void) {
         stop(motors, n, arrows);
         delay(2000);
         
-        // increments the duty_cycle by 10%
+        // increments the duty_cycle by 5%
         if (duty_cycle <= 40)
-            duty_cycle += 10;
+            duty_cycle += 5;
     }
 
 
