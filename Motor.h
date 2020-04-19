@@ -22,7 +22,7 @@
     extern int keyboard_interrupt;
     extern Motor m1, m2;
 
-    int setup(Motor motors[], int n, Arrow arrows);
+    void setup(Motor motors[], int n, Arrow arrows);
     void cleanup(Motor motors[], int n, Arrow arrows);
     void stop(Motor motors[], int n, Arrow arrows);
     void forward(Motor motors[], int n, int duty_cycle, Arrow arrows);
