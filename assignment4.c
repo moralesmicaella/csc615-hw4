@@ -30,15 +30,17 @@ void sigint_handler(int sig_num) {
 }
 
 PI_THREAD(get_speed) {
-    int curr_state = digitalRead(SENSOR_PIN);
-    printf("current state: %d \n", curr_state);
-    if(curr_state != prev_state) {
-        if(curr_state == 1) {
-            time_elapsed = clock() - start;
-            angular_speed = (2 * PI) / (pulses_per_rev * time_elapsed) / CLOCKS_PER_SEC;
-            printf("Speed is: %f (rad/s)\n", angular_speed);
+    while (1) {
+        int curr_state = digitalRead(SENSOR_PIN);
+        printf("current state: %d \n", curr_state);
+        if(curr_state != prev_state) {
+            if(curr_state == 1) {
+                time_elapsed = clock() - start;
+                angular_speed = (2 * PI) / (pulses_per_rev * time_elapsed) / CLOCKS_PER_SEC;
+                printf("Speed is: %f (rad/s)\n", angular_speed);
+            }
+            prev_state = curr_state;
         }
-        prev_state = curr_state;
     }
     
     return 0;
