@@ -21,7 +21,8 @@
 int pulses_per_rev = 20;
 double angular_speed;
 clock_t start, time_elapsed;
-int prev_state = 0;
+int sampling_period = 1000;
+int pulses = 0;
 
 // handles a signal interrupt
 void sigint_handler(int sig_num) {
@@ -31,16 +32,16 @@ void sigint_handler(int sig_num) {
 
 PI_THREAD(get_speed) {
     while (1) {
-        int curr_state = digitalRead(SENSOR_PIN);
-        printf("current state: %d \n", curr_state);
-        if(curr_state != prev_state) {
-            if(curr_state == 1) {
-                time_elapsed = clock() - start;
-                angular_speed = (2 * PI) / (pulses_per_rev * time_elapsed) / CLOCKS_PER_SEC;
-                printf("Speed is: %f (rad/s)\n", angular_speed);
-            }
-            prev_state = curr_state;
+        time_elapsed = clock() - start;
+        if (time_elapsed >= sampling_period) {
+            angular_speed = (2 * PI / pulses_per_rev) / (time_elapsed * pulses) / CLOCKS_PER_SEC;
+            printf("Speed is: %f (rad/s)\n", angular_speed);
+            start = clock();
+            pulses = 0;
+        } else {
+            pulses++;
         }
+        
     }
     
     return 0;
