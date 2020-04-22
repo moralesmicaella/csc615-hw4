@@ -77,15 +77,15 @@ int main(void) {
         printf("Failed to create a thread!");
     }
 
-    int duty_cycle = 10;
+    int duty_cycle = 20;
     while (1) {
         // moves the motors forward for 5 seconds
         forward(motors, n, duty_cycle, arrows);
         delay(10000);
         
-        // increments the duty_cycle by 2%
-        if (duty_cycle <= 30)
-            duty_cycle += 2;
+        // increments the duty_cycle by 5%
+        if (duty_cycle <= 50)
+            duty_cycle += 5;
     }
 
 
