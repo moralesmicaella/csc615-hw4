@@ -21,6 +21,7 @@ void getSpeed() {
             if (signal == 1) {
                 pulses++;
                 printf("Number of pulses: %d \n", pulses);
+                while(signal == 1);
             } 
             time_elapsed = millis() - start;
         }
