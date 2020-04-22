@@ -3,7 +3,7 @@
 #include <time.h>
 
 #define PI 3.14
-#define SENSOR_PIN 7
+#define SENSOR_PIN 0
 
 int pulses_per_rev = 20;
 double angular_speed;
