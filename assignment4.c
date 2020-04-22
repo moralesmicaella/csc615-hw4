@@ -29,7 +29,7 @@ void sigint_handler(int sig_num) {
     keyboard_interrupt = 1;
 }
 
-PI_THREAD(get_speed) {
+void* get_speed(void* arg) {
     start = millis();
     while(1) {
         time_elapsed = millis() - start;
@@ -69,10 +69,12 @@ int main(void) {
     
     pinMode(SENSOR_PIN, INPUT);
 
-    int thread = piThreadCreate(get_speed);
+    pthread_t thread_id;
+    pthread_create(&thread_id, NULL, &get_speed, NULL);
+    /*int thread = piThreadCreate(get_speed);
     if (thread != 0) {
         printf("Failed to create a thread!");
-    }
+    }*/
 
     int duty_cycle = 10;
     while (1) {
