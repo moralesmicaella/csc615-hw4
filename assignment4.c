@@ -68,7 +68,6 @@ int main(void) {
     setup(motors, n, arrows);
     
     pinMode(SENSOR_PIN, INPUT);
-    start = clock();
 
     int thread = piThreadCreate(get_speed);
     if (thread != 0) {
