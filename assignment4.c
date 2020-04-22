@@ -78,7 +78,7 @@ int main(void) {
     }
 
     int duty_cycle = 10;
-    /*while (1) {
+    while (1) {
         // moves the motors forward for 5 seconds
         forward(motors, n, duty_cycle, arrows);
         delay(5000);
@@ -98,7 +98,7 @@ int main(void) {
         // increments the duty_cycle by 2%
         if (duty_cycle <= 30)
             duty_cycle += 2;
-    }*/
+    }
 
 
     return 0;
