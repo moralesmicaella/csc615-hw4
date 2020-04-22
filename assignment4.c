@@ -34,17 +34,17 @@ PI_THREAD (get_speed) {
     start = millis();
     while(1) {
         time_elapsed = millis() - start;
-        if (time_elapsed < sampling_period) {
+        while(time_elapsed < sampling_period) {
             if (digitalRead(SENSOR_PIN) == 1) {
                 pulses++;
+                while(digitalRead(SENSOR_PIN) == 1);
             } 
-            //time_elapsed = millis() - start;
-        } else {
-            angular_speed = (2 * PI * pulses) / (pulses_per_rev);
-            printf("Speed is: %f (rad/s)\n", angular_speed);
-            pulses =  0;
-            start = millis();
+            time_elapsed = millis() - start;
         }
+        angular_speed = (2 * PI * pulses) / (pulses_per_rev);
+        printf("Speed is: %f (rad/s)\n", angular_speed);
+        pulses =  0;
+        start = millis();
     }
     
     return 0;
