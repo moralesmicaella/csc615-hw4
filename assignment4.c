@@ -18,10 +18,11 @@
 #define SENSOR_PIN 8
 
 int pulses_per_rev = 20;
-double angular_speed;
+double angular_velocity, linear_velocity;
 int start, time_elapsed;
 int sampling_period = 1000;
 int pulses = 0;
+int radius =  1.25;
 
 // handles a signal interrupt
 void sigint_handler(int sig_num) {
@@ -42,8 +43,9 @@ PI_THREAD (get_speed) {
             } 
             time_elapsed = millis() - start;
         }
-        angular_speed = (2 * PI * pulses) / (pulses_per_rev);
-        printf("Speed is: %f (rad/s)\n", angular_speed);
+        angular_velocity = (2 * PI * pulses) / (pulses_per_rev);
+        linear_velocity = angular_velocity * radius *100;
+        printf("Speed is: %f (rad/s)\n", linear_velocity);
         pulses =  0;
         start = millis();
     }
