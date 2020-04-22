@@ -18,7 +18,7 @@ void getSpeed() {
         while(time_elapsed < sampling_period) {
             signal = digitalRead(SENSOR_PIN);
             printf("signal: %d \n", signal);
-            if (signal) == LOW) {
+            if (signal == LOW) {
                 pulses++;
             } 
             time_elapsed = millis() - start;
