@@ -15,7 +15,7 @@
 #include "Motor.h"
 
 #define PI 3.14
-#define SENSOR_PIN 7
+#define SENSOR_PIN 1
 
 int pulses_per_rev = 20;
 double angular_speed;
@@ -29,7 +29,8 @@ void sigint_handler(int sig_num) {
     keyboard_interrupt = 1;
 }
 
-void* get_speed(void* arg) {
+//void* get_speed(void* arg) {
+PI_THREAD (get_speed) {
     start = millis();
     while(1) {
         time_elapsed = millis() - start;
@@ -66,18 +67,18 @@ int main(void) {
     } 
 
     setup(motors, n, arrows);
-    
     pinMode(SENSOR_PIN, INPUT);
 
-    pthread_t thread_id;
-    pthread_create(&thread_id, NULL, &get_speed, NULL);
-    /*int thread = piThreadCreate(get_speed);
+    //pthread_t thread_id;
+    //pthread_create(&thread_id, NULL, &get_speed, NULL);
+    
+    int thread = piThreadCreate(get_speed);
     if (thread != 0) {
         printf("Failed to create a thread!");
-    }*/
+    }
 
     int duty_cycle = 10;
-    while (1) {
+    /*while (1) {
         // moves the motors forward for 5 seconds
         forward(motors, n, duty_cycle, arrows);
         delay(5000);
@@ -97,7 +98,7 @@ int main(void) {
         // increments the duty_cycle by 2%
         if (duty_cycle <= 30)
             duty_cycle += 2;
-    }
+    }*/
 
 
     return 0;
