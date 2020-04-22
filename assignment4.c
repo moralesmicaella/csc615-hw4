@@ -12,7 +12,6 @@
 #include <stdio.h>
 #include <signal.h>
 #include <wiringPi.h>
-#include <time.h>
 #include "Motor.h"
 
 #define PI 3.14
@@ -30,23 +29,26 @@ void sigint_handler(int sig_num) {
     keyboard_interrupt = 1;
 }
 
-/*
 PI_THREAD(get_speed) {
-    while (1) {
-        time_elapsed = clock() - start;
-        if (time_elapsed >= sampling_period) {
-            angular_speed = (2 * PI / pulses_per_rev) / (time_elapsed * pulses);
-            printf("Speed is: %f (rad/s)\n", angular_speed);
-            start = clock();
-            pulses = 0;
-        } else {
-            pulses++;
+    start = millis();
+    while(1) {
+        time_elapsed = millis() - start;
+        while(time_elapsed < sampling_period) {
+            if (digitalRead(SENSOR_PIN) == 1) {
+                pulses++;
+                printf("Number of pulses: %d \n", pulses);
+                while(digitalRead(SENSOR_PIN) == 1);
+            } 
+            time_elapsed = millis() - start;
         }
-        
+        angular_speed = (2 * PI * pulses) / (pulses_per_rev);
+        printf("Speed is: %f (rad/s)\n", angular_speed);
+        pulses =  0;
+        start = millis();
     }
     
     return 0;
-}*/
+}
 
 int main(void) {
     Motor motors[] = {m1, m2};
@@ -68,11 +70,10 @@ int main(void) {
     pinMode(SENSOR_PIN, INPUT);
     start = clock();
 
-    /*
     int thread = piThreadCreate(get_speed);
     if (thread != 0) {
         printf("Failed to create a thread!");
-    }*/
+    }
 
     int duty_cycle = 10;
     while (1) {
