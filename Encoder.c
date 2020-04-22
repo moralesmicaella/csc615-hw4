@@ -20,8 +20,8 @@ void getSpeed() {
             //printf("signal: %d \n", signal);
             if (signal == 1) {
                 pulses++;
-                printf("Number of pulses: %d \n", pulses);
                 signal = digitalRead(SENSOR_PIN);
+                printf("signal: %d \n", signal);
                 while(signal == 1);
             } 
             time_elapsed = millis() - start;
