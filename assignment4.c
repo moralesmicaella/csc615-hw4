@@ -32,12 +32,13 @@ void sigint_handler(int sig_num) {
 //void* get_speed(void* arg) {
 PI_THREAD (get_speed) {
     start = millis();
+    printf("Start\n");
     while(1) {
         time_elapsed = millis() - start;
         while(time_elapsed < sampling_period) {
-            if (digitalRead(SENSOR_PIN) == 1) {
+            if (digitalRead(SENSOR_PIN)) {
                 pulses++;
-                while(digitalRead(SENSOR_PIN) == 1);
+                while(digitalRead(SENSOR_PIN));
             } 
             time_elapsed = millis() - start;
         }
@@ -83,8 +84,8 @@ int main(void) {
         delay(10000);
         
         // increments the duty_cycle by 2%
-        if (duty_cycle <= 50)
-            duty_cycle += 5;
+        if (duty_cycle <= 30)
+            duty_cycle += 2;
     }
 
 
