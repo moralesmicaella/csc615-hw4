@@ -15,7 +15,7 @@
 #include "Motor.h"
 
 #define PI 3.14
-#define SENSOR_PIN 1
+#define SENSOR_PIN 8
 
 int pulses_per_rev = 20;
 double angular_speed;
