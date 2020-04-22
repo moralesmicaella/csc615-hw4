@@ -95,8 +95,8 @@ int main(void) {
         delay(2000);
         
         // increments the duty_cycle by 2%
-        if (duty_cycle <= 30)
-            duty_cycle += 2;
+        if (duty_cycle <= 50)
+            duty_cycle += 5;
     }
 
 
