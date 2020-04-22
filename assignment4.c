@@ -80,6 +80,7 @@ int main(void) {
     while (1) {
         // moves the motors forward for 5 seconds
         forward(motors, n, duty_cycle, arrows);
+        delay(10000);
         
         // increments the duty_cycle by 2%
         if (duty_cycle <= 50)
