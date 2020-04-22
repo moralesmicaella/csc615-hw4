@@ -19,7 +19,7 @@
 
 int pulses_per_rev = 20;
 double angular_speed;
-clock_t start, time_elapsed;
+int start, time_elapsed;
 int sampling_period = 1000;
 int pulses = 0;
 
