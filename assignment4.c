@@ -30,11 +30,12 @@ void sigint_handler(int sig_num) {
     keyboard_interrupt = 1;
 }
 
+/*
 PI_THREAD(get_speed) {
     while (1) {
         time_elapsed = clock() - start;
         if (time_elapsed >= sampling_period) {
-            angular_speed = (2 * PI / pulses_per_rev) / (time_elapsed * pulses) / CLOCKS_PER_SEC;
+            angular_speed = (2 * PI / pulses_per_rev) / (time_elapsed * pulses);
             printf("Speed is: %f (rad/s)\n", angular_speed);
             start = clock();
             pulses = 0;
@@ -45,7 +46,7 @@ PI_THREAD(get_speed) {
     }
     
     return 0;
-}
+}*/
 
 int main(void) {
     Motor motors[] = {m1, m2};
@@ -67,10 +68,11 @@ int main(void) {
     pinMode(SENSOR_PIN, INPUT);
     start = clock();
 
-    int x = piThreadCreate(get_speed);
-    if (x != 0) {
-        printf("Thread did not start!");
-    }
+    /*
+    int thread = piThreadCreate(get_speed);
+    if (thread != 0) {
+        printf("Failed to create a thread!");
+    }*/
 
     int duty_cycle = 10;
     while (1) {
@@ -90,9 +92,9 @@ int main(void) {
         stop(motors, n, arrows);
         delay(2000);
         
-        // increments the duty_cycle by 5%
-        if (duty_cycle <= 40)
-            duty_cycle += 5;
+        // increments the duty_cycle by 2%
+        if (duty_cycle <= 30)
+            duty_cycle += 2;
     }
 
 
