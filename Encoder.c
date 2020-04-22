@@ -17,13 +17,13 @@ void getSpeed() {
         time_elapsed = millis() - start;
         while(time_elapsed < sampling_period) {
             signal = digitalRead(SENSOR_PIN);
-            printf("signal: %d \n", signal);
-            if (signal == LOW) {
+            //printf("signal: %d \n", signal);
+            if (signal == 1) {
                 pulses++;
+                printf("Number of pulses: %d \n", pulses);
             } 
             time_elapsed = millis() - start;
         }
-        printf("Number of pulses: %d \n", pulses);
         angular_speed = (2 * PI * pulses) / (pulses_per_rev);
         printf("Speed is: %f (rad/s)\n", angular_speed);
         pulses =  0;
