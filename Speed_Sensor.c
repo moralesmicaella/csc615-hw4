@@ -19,9 +19,9 @@ void set_sensor_pin(int pin) {
 void calculate_velocity() {
     time_elapsed = millis() - start;
     while(time_elapsed < sampling_period) {
-        if (digitalRead(SENSOR_PIN)) {
+        if (digitalRead(sensor_pin)) {
             pulses++;
-            while(digitalRead(SENSOR_PIN));
+            while(digitalRead(sensor_pin));
         } 
         time_elapsed = millis() - start;
     }
