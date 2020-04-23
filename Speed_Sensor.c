@@ -4,12 +4,17 @@
 
 #define PI 3.14
 
+int sensor_pin;
 const int pulses_per_rev = 20;
 const int radius =  1.25;
 
 double linear_velocity;
 int start = millis(), time_elapsed;
 int pulses=0, sampling_period = 1000;
+
+void set_sensor_pin(int pin) {
+    sensor_pin = pin;
+}
 
 void calculate_velocity() {
     time_elapsed = millis() - start;

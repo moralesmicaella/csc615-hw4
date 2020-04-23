@@ -24,6 +24,7 @@ void sigint_handler(int sig_num) {
 }
 
 PI_THREAD (get_velocity) {
+    set_sensor_pin(SENSOR_PIN);
     while (1) {
         calculate_velocity();
     }
