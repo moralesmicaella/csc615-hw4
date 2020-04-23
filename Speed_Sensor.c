@@ -9,7 +9,7 @@ const int pulses_per_rev = 20;
 const int radius =  1.25;
 
 double linear_velocity;
-int start = millis(), time_elapsed;
+int start, time_elapsed;
 int pulses=0, sampling_period = 1000;
 
 void set_sensor_pin(int pin) {
