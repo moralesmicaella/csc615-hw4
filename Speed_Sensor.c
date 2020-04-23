@@ -17,6 +17,7 @@ void set_sensor_pin(int pin) {
 }
 
 void calculate_velocity() {
+    start = millis();
     time_elapsed = millis() - start;
     while(time_elapsed < sampling_period) {
         if (digitalRead(sensor_pin)) {
@@ -29,6 +30,4 @@ void calculate_velocity() {
     linear_velocity = (2 * PI * radius * pulses) / (pulses_per_rev * time_elapsed);
     printf("Speed is: %f (cm/s)\n", linear_velocity);
     pulses =  0;
-    start = millis();
-    
 }
