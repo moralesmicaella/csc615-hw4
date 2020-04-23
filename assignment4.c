@@ -13,16 +13,9 @@
 #include <signal.h>
 #include <wiringPi.h>
 #include "Motor.h"
+#include "Speed_Sensor.h"
 
-#define PI 3.14
 #define SENSOR_PIN 8
-
-int pulses_per_rev = 20;
-double angular_velocity, linear_velocity;
-int start, time_elapsed;
-int sampling_period = 1000;
-int pulses = 0;
-int radius =  1.25;
 
 // handles a signal interrupt
 void sigint_handler(int sig_num) {
@@ -30,29 +23,18 @@ void sigint_handler(int sig_num) {
     keyboard_interrupt = 1;
 }
 
-//void* get_speed(void* arg) {
-PI_THREAD (get_speed) {
-    start = millis();
-    printf("Start\n");
-    while(1) {
-        time_elapsed = millis() - start;
-        while(time_elapsed < sampling_period) {
-            if (digitalRead(SENSOR_PIN)) {
-                pulses++;
-                while(digitalRead(SENSOR_PIN));
-            } 
-            time_elapsed = millis() - start;
-        }
-        time_elapsed /= 1000;
-        angular_velocity = (2 * PI * pulses) / (pulses_per_rev * time_elapsed);
-        linear_velocity = angular_velocity * radius;
-        printf("Speed is: %f (cm/s)\n", linear_velocity);
-        pulses =  0;
-        start = millis();
+PI_THREAD (get_velocity) {
+    while (1) {
+        calculate_velocity();
     }
     
     return 0;
-}
+} 
+
+/*
+PI_THREAD (move_motors) {
+
+}*/
 
 int main(void) {
     Motor motors[] = {m1, m2};
@@ -71,14 +53,17 @@ int main(void) {
 
     setup(motors, n, arrows);
     pinMode(SENSOR_PIN, INPUT);
-
-    //pthread_t thread_id;
-    //pthread_create(&thread_id, NULL, &get_speed, NULL);
     
-    int thread = piThreadCreate(get_speed);
-    if (thread != 0) {
+    int speed_sensor_thread = piThreadCreate(get_velocity);
+    if (speed_sensor_thread != 0) {
         printf("Failed to create a thread!");
     }
+
+    /*
+    int motor_thread = piThreadCreate(move_motors);
+    if (motor_thread != 0) {
+        printf("Failed to create a thread!");
+    }*/
 
     int duty_cycle = 20;
     while (1) {
