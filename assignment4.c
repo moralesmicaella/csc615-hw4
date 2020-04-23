@@ -45,7 +45,7 @@ PI_THREAD (get_speed) {
         }
         time_elapsed /= 1000;
         angular_velocity = (2 * PI * pulses) / (pulses_per_rev * time_elapsed);
-        linear_velocity = angular_velocity * radius *100;
+        linear_velocity = angular_velocity * radius;
         printf("Speed is: %f (cm/s)\n", linear_velocity);
         pulses =  0;
         start = millis();
