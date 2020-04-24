@@ -26,6 +26,7 @@ void calculate_velocity() {
         } 
         time_elapsed = millis() - start;
     }
+    printf("T: %d\n", time_elapsed);
     time_elapsed /= 1000;
     linear_velocity = (2 * PI * radius * pulses) / (pulses_per_rev * time_elapsed);
     printf("Speed is: %f (cm/s)\n", linear_velocity);
