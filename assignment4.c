@@ -25,9 +25,9 @@ void sigint_handler(int sig_num) {
 
 PI_THREAD(get_velocity) {
     while (1) {
-        piLock();
+        piLock(1);
         calculate_velocity();
-        piUnlock();
+        piUnlock(1);
     }
     return 0;
 } 
