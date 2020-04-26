@@ -18,14 +18,13 @@
 
 #define PI 3.14
 
-const int sensor_pin;
+int sensor_pin;
 const int pulses_per_rev = 20;
 const int radius =  1.25;
 const int sampling_period = 1000;
 
 double linear_velocity;
-int start, time_elapsed;
-int pulses;
+int start, time_elapsed, pulses;
 
 // sets the sensor pin to input mode
 void set_sensor_pin(int pin) {
