@@ -58,7 +58,7 @@ int main(void) {
     int duty_cycle = 20;
     for(int i = 1; i < 5; i++) {
         forward(motors, n, duty_cycle, arrows);
-        delay(4000);
+        delay(8000);
 
         duty_cycle += 10;
     }
