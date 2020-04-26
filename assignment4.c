@@ -55,7 +55,7 @@ int main(void) {
         printf("Failed to create a thread!");
     }
 
-    int duty_cycle = 20;
+    int duty_cycle = 30;
     for(int i = 1; i < 5; i++) {
         forward(motors, n, duty_cycle, arrows);
         delay(5000);
