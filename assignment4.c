@@ -59,13 +59,13 @@ int main(void) {
     int duty_cycle = 20;
     for(int i = 1; i <=3; i++) {
         // moves the motors forward for 6 seconds
-        forward(motors, n, duty_cycle, arrows);
         moving = 1;
+        forward(motors, n, duty_cycle, arrows);
         delay(6000);
 
         // stops the motors for 2 seconds
-        stop(motors, n, arrows);
         moving = 0;
+        stop(motors, n, arrows);
         delay(3000);
         
         // increments the duty_cycle by 5% until it reaches 50%
