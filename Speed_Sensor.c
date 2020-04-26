@@ -23,7 +23,7 @@ const int pulses_per_rev = 20;
 const int radius =  1.25;
 
 double linear_velocity;
-int start, time_elapsed, pulses;
+int start, end, pulses;
 int count, prev_count=0;
 
 // sets the sensor pin to input mode
@@ -37,27 +37,10 @@ void set_sensor_pin(int pin) {
 * uses it to calculate the velocity of an optical wheel encoder
 * it prints the velocity in cm/s
 */
-/*
-void calculate_velocity(int sampling_period) {
-    pulses =  0;
-    start = millis();
-    time_elapsed = millis() - start;
-    while(time_elapsed < sampling_period) {
-        if (digitalRead(sensor_pin)) {
-            pulses++;
-            while(digitalRead(sensor_pin));
-        } 
-        time_elapsed = millis() - start;
-    }
-    time_elapsed /= 1000; // convert to seconds
-    linear_velocity = (2 * PI * radius * pulses) / (pulses_per_rev * time_elapsed);
-    printf("Speed is: %f (cm/s)\n", linear_velocity);
-}*/
-
 void calculate_velocity(int sampling_period) {
     start = millis();
-    time_elapsed = start + sampling_period;
-    while(start < time_elapsed) {
+    end = start + sampling_period;
+    while(start < end) {
         if (digitalRead(sensor_pin)) {
             count++;
             while(digitalRead(sensor_pin));
