@@ -27,7 +27,7 @@ void sigint_handler(int sig_num) {
 }
 
 PI_THREAD(get_velocity) {
-    int sampling_period = 1000;
+    int sampling_period = 2000;
     while (1) {
         calculate_velocity(sampling_period);
     }
