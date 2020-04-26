@@ -32,12 +32,6 @@ void set_sensor_pin(int pin) {
     pinMode(pin, INPUT);
 }
 
-void reset_calculation() {
-    pulses = 0;
-    time_elapsed = 0;
-    linear_velocity = 0;
-}
-
 // calculates the velocity using the pulse counting method
 void calculate_velocity() {
     pulses =  0;

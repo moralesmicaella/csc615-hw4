@@ -21,7 +21,6 @@
 void sigint_handler(int sig_num) {
     printf("Keyboard Interrupt\n");
     keyboard_interrupt = 1;
-    reset_calculation();
 }
 
 PI_THREAD(get_velocity) {
