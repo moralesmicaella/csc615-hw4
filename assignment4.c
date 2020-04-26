@@ -60,7 +60,7 @@ int main(void) {
         forward(motors, n, duty_cycle, arrows);
         delay(5000);
         
-        duty_cycle += 10;
+        duty_cycle += 5;
     }
 
     stop(motors, n, arrows);
