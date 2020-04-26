@@ -56,11 +56,11 @@ int main(void) {
 
     int duty_cycle = 20;
     for(int i = 1; i < 5; i++) {
-        piLock(1);
         // moves the motors forward for 4 seconds
         forward(motors, n, duty_cycle, arrows);
         delay(4000);
         
+        piLock(1);
         // increments the duty_cycle by 10%
         duty_cycle += 10;
         piUnlock(1);
