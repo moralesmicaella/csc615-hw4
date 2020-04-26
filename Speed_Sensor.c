@@ -36,6 +36,7 @@ void set_sensor_pin(int pin) {
 * uses it to calculate the velocity of an optical wheel encoder
 * it prints the velocity in cm/s
 */
+/*
 void calculate_velocity(int sampling_period) {
     pulses =  0;
     start = millis();
@@ -49,5 +50,21 @@ void calculate_velocity(int sampling_period) {
     }
     time_elapsed /= 1000; // convert to seconds
     linear_velocity = (2 * PI * radius * pulses) / (pulses_per_rev * time_elapsed);
+    printf("Speed is: %f (cm/s)\n", linear_velocity);
+}*/
+
+void calculate_velocity(int sampling_period) {
+    pulses =  0;
+    start = millis();
+    time_elapsed = start + sampling_period;
+    while(start < time_elapsed) {
+        if (digitalRead(sensor_pin)) {
+            pulses++;
+            while(digitalRead(sensor_pin));
+        } 
+        start = millis();
+    }
+    sampling_period /= 1000; // convert to seconds
+    linear_velocity = (2 * PI * radius * pulses) / (pulses_per_rev * sampling_period);
     printf("Speed is: %f (cm/s)\n", linear_velocity);
 }
