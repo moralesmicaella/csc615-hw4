@@ -63,8 +63,8 @@ int main(void) {
         forward(motors, n, duty_cycle, arrows);
         delay(6000);
 
-        // stops the motors for 2 seconds
-        moving = 0;
+        // stops the motors for 3 seconds
+        moving = 0; delay(1000);
         stop(motors, n, arrows);
         delay(3000);
         
