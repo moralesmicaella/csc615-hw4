@@ -25,9 +25,7 @@ void sigint_handler(int sig_num) {
 
 PI_THREAD(get_velocity) {
     while (1) {
-        piLock(1);
         calculate_velocity();
-        piUnlock(1);
     }
     return 0;
 } 
@@ -57,13 +55,13 @@ int main(void) {
     int duty_cycle = 20;
     for(int i = 1; i < 5; i++) {
         // moves the motors forward for 4 seconds
+        //piLock(1);
         forward(motors, n, duty_cycle, arrows);
         delay(4000);
+        //piUnlock(1);
         
-        piLock(1);
         // increments the duty_cycle by 10%
         duty_cycle += 10;
-        piUnlock(1);
     }
 
     // stops the motor
