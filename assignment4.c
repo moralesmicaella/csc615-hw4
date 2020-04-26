@@ -17,6 +17,8 @@
 
 #define SENSOR_PIN 8
 
+int record = 0;
+
 // handles a signal interrupt
 void sigint_handler(int sig_num) {
     printf("Keyboard Interrupt\n");
@@ -25,6 +27,7 @@ void sigint_handler(int sig_num) {
 
 PI_THREAD(get_velocity) {
     while (1) {
+        while(!record);
         calculate_velocity();
     }
     return 0;
@@ -55,6 +58,7 @@ int main(void) {
     int duty_cycle = 20;
     for(int i = 1; i < 5; i++) {
         // moves the motors forward for 4 seconds
+        record = 1;
         forward(motors, n, duty_cycle, arrows);
         delay(4000);
         
