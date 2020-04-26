@@ -59,7 +59,7 @@ int main(void) {
     for(int i = 1; i < 5; i++) {
         forward(motors, n, duty_cycle, arrows);
         delay(5000);
-        forward(motors, n, duty_cycle, arrows);
+        backward(motors, n, duty_cycle, arrows);
         delay(5000);
         duty_cycle += 5;
     }
