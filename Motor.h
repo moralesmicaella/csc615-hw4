@@ -5,8 +5,8 @@
 * Project: Assignment 4 - Motors & Speed Encoder
 * File: Motor.h
 *
-* Description:
-* 
+* Description: This a header file that declares the variables
+* and functions needed for the motors
 ******************************************************************/
 
 #ifndef MOTOR_H
@@ -21,6 +21,7 @@
 
     extern int keyboard_interrupt;
     extern Motor m1, m2;
+    extern Arrow arrows;
 
     void setup(Motor motors[], int n, Arrow arrows);
     void cleanup(Motor motors[], int n, Arrow arrows);
