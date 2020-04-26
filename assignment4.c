@@ -56,8 +56,6 @@ int main(void) {
     for(int i = 1; i < 5; i++) {
         // moves the motors forward for 4 seconds
         forward(motors, n, duty_cycle, arrows);
-        delay(1000);
-        record = 1;
         delay(4000);
         
         // increments the duty_cycle by 10%
