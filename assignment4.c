@@ -17,16 +17,19 @@
 
 #define SENSOR_PIN 8
 
+int moving = 0;
+
 // handles a signal interrupt
 void sigint_handler(int sig_num) {
     printf("Keyboard Interrupt\n");
     keyboard_interrupt = 1;
 }
 
-PI_THREAD (get_velocity) {
+PI_THREAD(get_velocity) {
     while (1) {
-        calculate_velocity();
-        delay(1000);
+        if(moving) {
+            calculate_velocity();
+        }
     }
     return 0;
 } 
@@ -57,10 +60,12 @@ int main(void) {
     for(int i = 1; i <=3; i++) {
         // moves the motors forward for 6 seconds
         forward(motors, n, duty_cycle, arrows);
+        moving = 1;
         delay(6000);
 
         // stops the motors for 2 seconds
         stop(motors, n, arrows);
+        moving = 0;
         delay(3000);
         
         // increments the duty_cycle by 5% until it reaches 50%
