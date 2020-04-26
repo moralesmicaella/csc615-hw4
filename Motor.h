@@ -6,7 +6,8 @@
 * File: Motor.h
 *
 * Description: This a header file that declares the variables
-* and functions needed for the motors
+* and functions needed for the motors to move forward, backward,
+* stop and change speed.
 ******************************************************************/
 
 #ifndef MOTOR_H

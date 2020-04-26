@@ -6,7 +6,7 @@
 * File: Speed_Sensor.h
 *
 * Description: This is a header file that declares the variables
-* and functions needed for the speed sensor
+* and functions needed for the speed sensor to calculate speed. 
 ******************************************************************/
 
 #ifndef  SPEED_SENSOR_H
@@ -15,6 +15,6 @@
 extern int sensor_pin;
 
 void set_sensor_pin(int pin);
-void calculate_velocity();
+void calculate_velocity(int sampling_period);
 
 #endif

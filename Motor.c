@@ -5,8 +5,8 @@
 * Project: Assignment 4 - Motors & duty_cycle Encoder
 * File: Motor.c
 *
-* Description: This file defines the variables and functions in
-* Motor.h
+* Description: This is a c file that defines the variables and 
+* functions in Motor.h
 *
 * Reference:
 * https://github.com/sbcshop/MotorShield/blob/master/PiMotor.py
@@ -61,9 +61,11 @@ void cleanup(Motor motors[], int n, Arrow arrows) {
     pinMode(arrows.ab, INPUT);
 }
 
-// changes the duty_cycle to 0% and sets the forward and reverse pins to low
-// turns off the light of the arrows in the motorshield
-// cleans up the pins when there is a keyboard interrupt and exits the program
+/*
+* changes the duty_cycle to 0% and sets the forward and reverse pins to low
+* turns off the light of the arrows in the motorshield
+* cleans up the pins when there is a keyboard interrupt and exits the program
+*/
 void stop(Motor motors[], int n, Arrow arrows) {
     for (int i = 0; i < n; i++) {
         printf("Motor%d stops...\n", motors[i].num);
@@ -82,10 +84,12 @@ void stop(Motor motors[], int n, Arrow arrows) {
     }
 }
 
-// sets the enable pin of the motors with the given duty_cycle 
-// and sets the forward pin to high and the reverse pin to low
-// lights up the forward arrow in the motorshield
-// cleans up the pins when there is a keyboard interrupt and exits the program
+/*
+* sets the enable pin of the motors with the given duty_cycle 
+* and sets the forward pin to high and the reverse pin to low
+* lights up the forward arrow in the motorshield
+* cleans up the pins when there is a keyboard interrupt and exits the program
+*/
 void forward(Motor motors[], int n, int duty_cycle, Arrow arrows) {
     for (int i = 0; i < n; i++) {
         printf("Motor%d is moving forward with %d%% power\n", motors[i].num, duty_cycle);
@@ -104,10 +108,12 @@ void forward(Motor motors[], int n, int duty_cycle, Arrow arrows) {
     }
 }
 
-// sets the enable pin of the motors with the given duty_cycle 
-// and sets the forward pin to low and the reverse pin to high
-// lights up the backward arrow in the motorshield
-// cleans up the pins when there is a keyboard interrupt and exits the program
+/* 
+* sets the enable pin of the motors with the given duty_cycle 
+* and sets the forward pin to low and the reverse pin to high
+* lights up the backward arrow in the motorshield
+* cleans up the pins when there is a keyboard interrupt and exits the program
+*/ 
 void backward(Motor motors[], int n, int duty_cycle, Arrow arrows) {
     for (int i = 0; i < n; i++) {
         printf("Motor%d is moving backward with %d%% power\n", motors[i].num, duty_cycle);

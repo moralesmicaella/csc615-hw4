@@ -5,8 +5,11 @@
 * Project: Assignment 4 - Motors & Speed Encoder
 * File: assignment4.c
 *
-* Description: This program 
-* 
+* Description: This is a multithreaded application that uses motors
+* w/ optical encoder wheels and an infrared speed sensor. The main 
+* function is responsible for moving the two motors forward, while  
+* the thread is responsible for reading the input from the sensor to 
+* calculate the velocity in cm/s using the pulse counting method.
 ******************************************************************/
 
 #include <stdio.h>
@@ -15,7 +18,7 @@
 #include "Motor.h"
 #include "Speed_Sensor.h"
 
-#define SENSOR_PIN 8
+#define SENSOR_PIN 8 // wiringPi 8 = P2
 
 // handles a signal interrupt
 void sigint_handler(int sig_num) {
@@ -24,8 +27,9 @@ void sigint_handler(int sig_num) {
 }
 
 PI_THREAD(get_velocity) {
+    int sampling_period = 1000;
     while (1) {
-        calculate_velocity();
+        calculate_velocity(sampling_period);
     }
     return 0;
 } 
@@ -45,8 +49,7 @@ int main(void) {
     setup(motors, n, arrows);
     set_sensor_pin(SENSOR_PIN);
     
-    // creates the thread to read input from the speed sensor 
-    // and calculate the velocity of the wheel encoder
+    // creates the thread for speed calculation
     int speed_sensor_thread = piThreadCreate(get_velocity);
     if (speed_sensor_thread != 0) {
         printf("Failed to create a thread!");
@@ -54,15 +57,12 @@ int main(void) {
 
     int duty_cycle = 20;
     for(int i = 1; i < 5; i++) {
-        // moves the motors forward for 4 seconds
         forward(motors, n, duty_cycle, arrows);
         delay(4000);
         
-        // increments the duty_cycle by 10%
         duty_cycle += 10;
     }
 
-    // stops the motor
     stop(motors, n, arrows);
 
     return 0;
