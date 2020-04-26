@@ -17,7 +17,7 @@
 
 #define SENSOR_PIN 8
 
-int moving = 0;
+int record_speed = 1;
 
 // handles a signal interrupt
 void sigint_handler(int sig_num) {
@@ -27,9 +27,11 @@ void sigint_handler(int sig_num) {
 
 PI_THREAD(get_velocity) {
     while (1) {
-        if(moving) {
+        piLock(1);
+        if(record_speed) {
             calculate_velocity();
         }
+        piUnlock(1);
     }
     return 0;
 } 
@@ -59,11 +61,12 @@ int main(void) {
     int duty_cycle = 20;
     for(int i = 1; i <=3; i++) {
         // moves the motors forward for 6 seconds
-        moving = 1;
         forward(motors, n, duty_cycle, arrows);
         delay(6000);
 
-        moving = 0; delay(1000);
+        piLock(1);
+        record_speed = 0; 
+        piUnlock(1);
 
         // stops the motors for 3 seconds
         stop(motors, n, arrows);
