@@ -26,6 +26,7 @@ void sigint_handler(int sig_num) {
 PI_THREAD (get_velocity) {
     while (1) {
         calculate_velocity();
+        delay(1000);
     }
     return 0;
 } 
