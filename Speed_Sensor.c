@@ -34,7 +34,7 @@ void set_sensor_pin(int pin) {
 /*
 * counts the number of pulses over the given sampling period and
 * uses it to calculate the velocity of an optical wheel encoder
-* it prints the speed in cm/s
+* it prints the velocity in cm/s
 */
 void calculate_velocity(int sampling_period) {
     pulses =  0;
