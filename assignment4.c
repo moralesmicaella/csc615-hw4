@@ -21,6 +21,7 @@
 void sigint_handler(int sig_num) {
     printf("Keyboard Interrupt\n");
     keyboard_interrupt = 1;
+    reset_calculation();
 }
 
 PI_THREAD(get_velocity) {
@@ -61,7 +62,7 @@ int main(void) {
         // increments the duty_cycle by 10%
         duty_cycle += 10;
     }
-    
+
     // stops the motor
     stop(motors, n, arrows);
 
