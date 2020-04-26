@@ -24,6 +24,7 @@ const int radius =  1.25;
 
 double linear_velocity;
 int start, time_elapsed, pulses;
+int count, prev_count=0;
 
 // sets the sensor pin to input mode
 void set_sensor_pin(int pin) {
@@ -54,16 +55,17 @@ void calculate_velocity(int sampling_period) {
 }*/
 
 void calculate_velocity(int sampling_period) {
-    pulses =  0;
     start = millis();
     time_elapsed = start + sampling_period;
     while(start < time_elapsed) {
         if (digitalRead(sensor_pin)) {
-            pulses++;
+            count++;
             while(digitalRead(sensor_pin));
         } 
         start = millis();
     }
+    pulses = count - prev_count;
+    prev_count = count;
     sampling_period /= 1000; // convert to seconds
     linear_velocity = (2 * PI * radius * pulses) / (pulses_per_rev * sampling_period);
     printf("Speed is: %f (cm/s)\n", linear_velocity);
