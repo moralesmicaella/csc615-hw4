@@ -55,12 +55,11 @@ int main(void) {
         printf("Failed to create a thread!");
     }
 
-    int duty_cycle = 30;
+    int duty_cycle = 20;
     for(int i = 1; i < 5; i++) {
         forward(motors, n, duty_cycle, arrows);
-        delay(5000);
-        backward(motors, n, duty_cycle, arrows);
-        delay(5000);
+        delay(4000);
+
         duty_cycle += 5;
     }
 
