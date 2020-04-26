@@ -17,8 +17,6 @@
 
 #define SENSOR_PIN 8
 
-int record_speed = 1;
-
 // handles a signal interrupt
 void sigint_handler(int sig_num) {
     printf("Keyboard Interrupt\n");
@@ -27,11 +25,7 @@ void sigint_handler(int sig_num) {
 
 PI_THREAD(get_velocity) {
     while (1) {
-        piLock(1);
-        if(record_speed) {
-            calculate_velocity();
-        }
-        piUnlock(1);
+        calculate_velocity();
     }
     return 0;
 } 
@@ -64,9 +58,7 @@ int main(void) {
         forward(motors, n, duty_cycle, arrows);
         delay(6000);
 
-        piLock(1);
-        record_speed = 0; 
-        piUnlock(1);
+        reset_calculation();
 
         // stops the motors for 3 seconds
         stop(motors, n, arrows);

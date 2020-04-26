@@ -18,18 +18,25 @@
 
 #define PI 3.14
 
-int sensor_pin;
+const int sensor_pin;
 const int pulses_per_rev = 20;
 const int radius =  1.25;
+const int sampling_period = 1000;
 
 double linear_velocity;
 int start, time_elapsed;
-int pulses, sampling_period = 1000;
+int pulses;
 
 // sets the sensor pin to input mode
 void set_sensor_pin(int pin) {
     sensor_pin = pin;
     pinMode(pin, INPUT);
+}
+
+void reset_calculation() {
+    pulses = 0;
+    time_elapsed = 0;
+    linear_velocity = 0;
 }
 
 // calculates the velocity using the pulse counting method
