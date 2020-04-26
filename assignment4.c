@@ -59,10 +59,13 @@ int main(void) {
     for(int i = 1; i < 5; i++) {
         // moves the motors forward for 4 seconds
         forward(motors, n, duty_cycle, arrows);
+        delay(500);
         record = 1;
         delay(4000);
         
         record = 0;
+        stop(motors, n, arrows);
+        delay(2000);
         // increments the duty_cycle by 10%
         duty_cycle += 10;
     }
