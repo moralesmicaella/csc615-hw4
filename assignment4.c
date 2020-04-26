@@ -53,18 +53,18 @@ int main(void) {
     }
 
     int duty_cycle = 20;
-    for(int i = 1; i <=2; i++) {
+    for(int i = 1; i <=3; i++) {
         // moves the motors forward for 6 seconds
         forward(motors, n, duty_cycle, arrows);
         delay(6000);
 
         // stops the motors for 2 seconds
         stop(motors, n, arrows);
-        delay(2000);
+        delay(3000);
         
         // increments the duty_cycle by 5% until it reaches 50%
         if (duty_cycle < 50)
-            duty_cycle += 5;
+            duty_cycle += 10;
     }
 
     return 0;
