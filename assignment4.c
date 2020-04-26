@@ -58,8 +58,8 @@ int main(void) {
     int duty_cycle = 20;
     for(int i = 1; i < 5; i++) {
         // moves the motors forward for 4 seconds
-        record = 1;
         forward(motors, n, duty_cycle, arrows);
+        record = 1;
         delay(4000);
         
         // increments the duty_cycle by 10%
