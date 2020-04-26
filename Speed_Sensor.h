@@ -15,7 +15,7 @@
 extern int sensor_pin;
 
 void set_sensor_pin(int pin);
-void reset_calculation();
+//void reset_calculation();
 void calculate_velocity();
 
 #endif

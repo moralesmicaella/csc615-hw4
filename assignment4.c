@@ -52,22 +52,18 @@ int main(void) {
         printf("Failed to create a thread!");
     }
 
-    int duty_cycle = 20;
-    for(int i = 1; i <=3; i++) {
+    int duty_cycle = 20, max_duty_cycle = 50;
+    for(int i = 1; i <=2; i++) {
         // moves the motors forward for 6 seconds
         forward(motors, n, duty_cycle, arrows);
-        delay(6000);
-
-        reset_calculation();
-
-        // stops the motors for 3 seconds
-        stop(motors, n, arrows);
         delay(3000);
         
-        // increments the duty_cycle by 5% until it reaches 50%
-        if (duty_cycle < 50)
+        // increments the duty_cycle by 10% until it reaches 50%
+        if (duty_cycle < max_duty_cycle)
             duty_cycle += 10;
     }
+    // stops the motor
+    stop(motors, n, arrows);
 
     return 0;
 }
